@@ -1,0 +1,33 @@
+{
+    "name": "okulbilisim/cms-bundle",
+    "description": "CMS Bundle for Ojs.io",
+    "keywords": ["cms","wiki","page", "symfony"],
+    "homepage": "https://github.com/okulbilisim/CmsBundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aybars Cengaver",
+            "email": "aybarscengaver@gmail.com",
+            "homepage": "http://emre.xyz"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/symfony": ">=2.4.0",
+        "doctrine/orm": "~2.2,>=2.2.3",
+        "doctrine/doctrine-bundle": "~1.2",
+        "knplabs/knp-paginator-bundle": "2.4.*"
+    },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "phpunit/phpunit": "3.7.*"
+    },
+    "suggest": {
+    },
+    "autoload": {
+        "psr-0": {"Okulbilisim\\CmsBundle": ""}
+    },
+    "target-dir": "Okulbilisim/CmsBundle"
+}

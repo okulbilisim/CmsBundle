@@ -1,0 +1,4 @@
+services:
+#    okulbilisim_cms.example:
+#        class: Okulbilisim\CmsBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
