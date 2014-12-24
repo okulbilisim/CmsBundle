@@ -2,3 +2,8 @@ services:
 #    okulbilisim_cms.example:
 #        class: Okulbilisim\CmsBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+  okulbilisimcmsbundle.twig.post_extension:
+    class: Okulbilisim\CmsBundle\Twig\PostExtension
+    tags:
+      - {name: twig.extension}
+    arguments: [ @service_container,@doctrine.orm.default_entity_manager ]

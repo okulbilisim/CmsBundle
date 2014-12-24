@@ -1,0 +1,55 @@
+Okulbilisim\CmsBundle\Entity\Post:
+  type: entity
+  repositoryClass: PostRepository
+  table: ok_posts
+  gedmo:
+    soft_deleteable:
+      field_name: deletedAt
+  id:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    title:
+      type: string
+      length: 255
+      nullable: false
+    slug:
+      type: string
+      gedmo:
+        slug:
+          seperator: _
+          fields:
+            - title
+    content:
+      type: text
+      nullable: true
+    status:
+      type: integer
+      length: 2
+    post_type:
+      type: string
+      length: 50
+    object:
+      type: string
+      nullable: true
+    objectId:
+      type: integer
+      nullable: true
+    createdAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: create
+      nullable: false
+    updatedAt:
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: update
+    deletedAt:
+      type: datetime
+      nullable: true
