@@ -50,11 +50,6 @@ class PostType extends AbstractType
                     'value'=>$options['objectId']
                 ]
             ])
-            ->add('parentPost','hidden',[
-                'attr'=>[
-                    'value'=>$options['parentPost']
-                ]
-            ])
         ;
     }
     
@@ -67,7 +62,6 @@ class PostType extends AbstractType
             'data_class' => 'Okulbilisim\CmsBundle\Entity\Post',
             'object'=>null,
             'objectId'=>null,
-            'parentPost'=>null
         ));
     }
 
