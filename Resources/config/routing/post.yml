@@ -26,6 +26,3 @@ post_update:
 post_delete:
     path:     /{id}/delete
     defaults: { _controller: "OkulbilisimCmsBundle:Post:delete" }
-okulbilisim_object_index:
-    path:     /object/{object}/{id}
-    defaults: { _controller: "OkulbilisimCmsBundle:Admin:index", post_type: 'default' }

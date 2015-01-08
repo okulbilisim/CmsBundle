@@ -1,3 +1,4 @@
+
 okulbilisim_cms_admin:
     pattern: /admin/cms/post/{posttype}/{object}/{id}
     defaults: { _controller: OkulbilisimCmsBundle:Admin:index, posttype: 'default' }
