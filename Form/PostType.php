@@ -38,7 +38,9 @@ class PostType extends AbstractType
                 ]
             ])
             ->add('post_type','choice',[
-                'choices'=>$post_types
+                'choices'=>$post_types,
+
+                'data'=>$options['post_type']
             ])
             ->add('object','hidden',[
                 'attr'=>[
@@ -62,6 +64,7 @@ class PostType extends AbstractType
             'data_class' => 'Okulbilisim\CmsBundle\Entity\Post',
             'object'=>null,
             'objectId'=>null,
+            'post_type'=>'default'
         ));
     }
 

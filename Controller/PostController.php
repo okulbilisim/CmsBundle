@@ -33,10 +33,10 @@ class PostController extends Controller
      * Creates a new Post entity.
      *
      */
-    public function createAction(Request $request, $object=null, $objectId=null)
+    public function createAction(Request $request, $post_type='default', $object=null, $objectId=null)
     {
         $entity = new Post();
-        $form = $this->createCreateForm($entity, $object, $objectId);
+        $form = $this->createCreateForm($entity,$post_type, $object, $objectId);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -60,13 +60,14 @@ class PostController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Post $entity, $object=null, $objectId=null)
+    private function createCreateForm(Post $entity,  $post_type='default',$object=null, $objectId=null)
     {
         $form = $this->createForm(new PostType($this->container), $entity, array(
-            'action' => $this->generateUrl('post_create'),
+            'action' => $this->generateUrl('post_create',['post_type'=>$post_type]),
             'method' => 'POST',
             'object' => $object,
-            'objectId' => $objectId
+            'objectId' => $objectId,
+            'post_type'=>$post_type
         ));
 
         $form->add('submit', 'submit', array('label' => 'Create'));
@@ -78,10 +79,10 @@ class PostController extends Controller
      * Displays a form to create a new Post entity.
      *
      */
-    public function newAction($object=null,$objectId=null)
+    public function newAction( $post_type='default', $object=null,$objectId=null)
     {
         $entity = new Post();
-        $form = $this->createCreateForm($entity, $object, $objectId);
+        $form = $this->createCreateForm($entity, $post_type='default', $object, $objectId);
 
         return $this->render('OkulbilisimCmsBundle:Post:new.html.twig', array(
             'entity' => $entity,

@@ -7,11 +7,11 @@ post_show:
     defaults: { _controller: "OkulbilisimCmsBundle:Post:show" }
 
 post_new:
-    path:     /new/{object}/{objectId}/{parentPost}
-    defaults: { _controller: "OkulbilisimCmsBundle:Post:new" , object: null, objectId: 0,parentPost: 0}
+    path:     /new/{post_type}/{object}/{objectId}/{parentPost}
+    defaults: { _controller: "OkulbilisimCmsBundle:Post:new" ,post_type: 'default', object: null, objectId: 0,parentPost: 0}
 post_create:
-    path:     /create/{object}/{objectId}/{parentPost}
-    defaults: { _controller: "OkulbilisimCmsBundle:Post:create" , object: null, objectId: 0,parentPost: 0}
+    path:     /create/{post_type}/{object}/{objectId}/{parentPost}
+    defaults: { _controller: "OkulbilisimCmsBundle:Post:create" , post_type: 'default', object: null, objectId: 0,parentPost: 0}
     requirements: { _method: post }
 
 post_edit:
@@ -27,3 +27,6 @@ post_delete:
     path:     /{id}/delete
     defaults: { _controller: "OkulbilisimCmsBundle:Post:delete" }
     requirements: { _method: post|delete }
+okulbilisim_object_index:
+    path:     /object/{object}/{id}
+    defaults: { _controller: "OkulbilisimCmsBundle:Admin:index", post_type: 'default' }

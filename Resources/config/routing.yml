@@ -1,6 +1,9 @@
+okulbilisim_cms_admin:
+    pattern: /admin/cms/{posttype}
+    defaults: { _controller: OkulbilisimCmsBundle:Admin:index, posttype: 'default' }
 okulbilisim_cms_post_admin:
     resource: "@OkulbilisimCmsBundle/Resources/config/routing/post.yml"
-    prefix:   /admin/post
+    prefix:   /admin/cms/post
 okulbilisim_cms_post_detail:
-    pattern: /{pageType}/{slug}
+    pattern: /cms/{pageType}/{slug}
     defaults: { _controller: OkulbilisimCmsBundle:Post:detail }

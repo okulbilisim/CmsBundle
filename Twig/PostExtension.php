@@ -23,7 +23,7 @@ class PostExtension  extends \Twig_Extension{
 
     public function getFilters(){
         return [
-            new \Twig_SimpleFilter('post_status',[$this,'status'])
+            new \Twig_SimpleFilter('post_status',[$this,'status']),
         ];
     }
 
@@ -31,8 +31,10 @@ class PostExtension  extends \Twig_Extension{
     {
         return [
             new \Twig_SimpleFunction('getPostObject',[$this,'post_object']),
+            new \Twig_SimpleFunction('cmsobject',[$this,'cmsobject'])
         ];
     }
+
     public function status($key)
     {
         $statuses = [
@@ -45,10 +47,52 @@ class PostExtension  extends \Twig_Extension{
         return $key;
     }
 
+    public function cmsobject($object,$id=0)
+    {
+        switch(gettype($object)){
+            case 'string';
+                return $this->getobject($this->decode($object),$id);
+            case 'object';
+                return $this->encode(get_class($object));
+        }
+    }
+
+    public function getobject($object, $id)
+    {
+        $repo = $this->em->find($object,$id);
+    }
+    /**
+     * Basic encoding
+     * @param $string
+     * @return string
+     */
+    public function encode($string)
+    {
+        $string = base64_encode($string);
+        $len = strlen($string);
+        $piece = $len/2;
+        $encoded = substr($string,$piece,$len-1).substr($string,0,$piece);
+        return $encoded;
+    }
+
+    /**
+     * Basic encoding
+     * @param $string
+     * @return string
+     */
+    public function decode($string)
+    {
+        $len = strlen($string);
+        $piece = $len/2;
+        $string = substr($string,$piece,$len-1).substr($string,0,$piece);
+        $decoded = base64_decode($string);
+        return $decoded;
+    }
     public function post_object(Post $post)
     {
-        $postRepo = $this->em->getRepository('OkulbilisimCmsBundle:Post');
-        $class = $post->getObject();
+        $object = $post->getObject();
+        $id = $post->getObjectId();
+        return "asd";
     }
 
     public function getName()
