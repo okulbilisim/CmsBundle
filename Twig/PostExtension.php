@@ -7,6 +7,7 @@ namespace Okulbilisim\CmsBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
 use Okulbilisim\CmsBundle\Entity\Post;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class PostExtension  extends \Twig_Extension{
@@ -24,6 +25,8 @@ class PostExtension  extends \Twig_Extension{
     public function getFilters(){
         return [
             new \Twig_SimpleFilter('post_status',[$this,'status']),
+            new \Twig_SimpleFilter('cmsobject',[$this,'cmsobject'])
+
         ];
     }
 
@@ -31,7 +34,6 @@ class PostExtension  extends \Twig_Extension{
     {
         return [
             new \Twig_SimpleFunction('getPostObject',[$this,'post_object']),
-            new \Twig_SimpleFunction('cmsobject',[$this,'cmsobject'])
         ];
     }
 
@@ -47,11 +49,11 @@ class PostExtension  extends \Twig_Extension{
         return $key;
     }
 
-    public function cmsobject($object,$id=0)
+    public function cmsobject($object)
     {
         switch(gettype($object)){
             case 'string';
-                return $this->getobject($this->decode($object),$id);
+                return '';
             case 'object';
                 return $this->encode(get_class($object));
         }
@@ -92,7 +94,14 @@ class PostExtension  extends \Twig_Extension{
     {
         $object = $post->getObject();
         $id = $post->getObjectId();
-        return "asd";
+        if(!$object) return '';
+        $objectClass = $this->decode($object);
+        $object = $this->em->find($objectClass,$id);
+        $cms_routes = $this->container->getParameter('cms_show_routes');
+        /** @var Router $router */
+        $router = $this->container->get('router');
+        $route = $router->generate($cms_routes[$objectClass],['id'=>$id]);
+        return '<a href="'.$route.'" target="_blank">'.$object.'</a>';
     }
 
     public function getName()

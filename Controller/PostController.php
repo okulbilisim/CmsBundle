@@ -44,7 +44,7 @@ class PostController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('post_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('okulbilisim_cms_admin', ['posttype'=>$entity->getPostType(),'object'=>$entity->getObject(),'id'=>$entity->getObjectId()]));
         }
 
         return $this->render('OkulbilisimCmsBundle:Post:new.html.twig', array(
@@ -82,7 +82,7 @@ class PostController extends Controller
     public function newAction( $post_type='default', $object=null,$objectId=null)
     {
         $entity = new Post();
-        $form = $this->createCreateForm($entity, $post_type='default', $object, $objectId);
+        $form = $this->createCreateForm($entity, $post_type, $object, $objectId);
 
         return $this->render('OkulbilisimCmsBundle:Post:new.html.twig', array(
             'entity' => $entity,
@@ -147,7 +147,7 @@ class PostController extends Controller
     {
         $form = $this->createForm(new PostType($this->container), $entity, array(
             'action' => $this->generateUrl('post_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+            'method' => 'PUT'
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
@@ -163,26 +163,21 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('OkulbilisimCmsBundle:Post')->find($id);
-
+        $entity = $em->getRepository('OkulbilisimCmsBundle:Post')->findOneBy(['id'=>$id]);
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('post_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('okulbilisim_cms_admin', ['posttype'=>$entity->getPostType(),'object'=>$entity->getObject(),'id'=>$entity->getObjectId()]));
         }
 
         return $this->render('OkulbilisimCmsBundle:Post:edit.html.twig', array(
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -194,20 +189,23 @@ class PostController extends Controller
     {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('OkulbilisimCmsBundle:Post')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Post entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        $post = [];
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('OkulbilisimCmsBundle:Post')->find($id);
+        $post = [
+            'posttype'=>$entity->getPostType(),
+            'object'=>$entity->getObject(),
+            'id'=>$entity->getObjectId()
+        ];
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
-        return $this->redirect($this->generateUrl('post'));
+        $em->remove($entity);
+        $em->flush();
+        return $this->redirect(
+            $this->generateUrl('okulbilisim_cms_admin', $post)
+        );
     }
 
     /**
@@ -221,7 +219,6 @@ class PostController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('post_delete', array('id' => $id)))
-            ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm();
     }

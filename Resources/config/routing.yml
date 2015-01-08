@@ -1,5 +1,5 @@
 okulbilisim_cms_admin:
-    pattern: /admin/cms/{posttype}
+    pattern: /admin/cms/post/{posttype}/{object}/{id}
     defaults: { _controller: OkulbilisimCmsBundle:Admin:index, posttype: 'default' }
 okulbilisim_cms_post_admin:
     resource: "@OkulbilisimCmsBundle/Resources/config/routing/post.yml"

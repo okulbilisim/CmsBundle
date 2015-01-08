@@ -3,7 +3,7 @@
     <ul class="nav nav-tabs">
         {% for key,posttype in post_types %}
             <li class="{% if selected_posttype==key %}active{% endif %}">
-                <a href="{{ url('okulbilisim_cms_admin',{posttype: key}) }}">{{ posttype|trans }}</a>
+                <a href="{{ url('okulbilisim_cms_admin',{posttype: key,object: object, id: objectId}) }}">{{ posttype|trans }}</a>
             </li>
         {% endfor %}
     </ul>
@@ -26,7 +26,7 @@
                     <td>{{ entity.id }}</td>
                     <td>{{ entity.title }}</td>
                     <td>{{ entity.slug }}</td>
-                    <td>{{ getPostObject(entity) }}</td>
+                    <td>{{ getPostObject(entity)|raw }}</td>
                     <td>
                         <a class="btn-xs btn btn-warning" href="{{ path('post_edit', { 'id': entity.id }) }}">
                             <i class="fa fa-pencil"></i>

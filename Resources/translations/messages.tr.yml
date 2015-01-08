@@ -1,0 +1,9 @@
+c: Oluştur
+cms.id: ID
+cms.title: Başlık
+cms.slug: Bağlantı
+cms.object: Nesne
+cms.action: İşlemler
+sure: Emin misiniz?
+'Are you sure?': 'Emin misiniz?'
+create: Oluştur

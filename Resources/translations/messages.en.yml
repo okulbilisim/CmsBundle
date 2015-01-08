@@ -1,0 +1,9 @@
+c: Create
+cms.id: ID
+cms.title: Title
+cms.slug: Slug
+cms.object: Object
+cms.action: Actions
+sure: Are You Sure?
+'Are you sure?': 'Are you sure?'
+create: Create

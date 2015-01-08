@@ -71,8 +71,11 @@ parameters:
         staticpage: Static Page
         aboutus: About Us
         #and what you want as page type
-        
+    cms_show_routes:
+        Ojs\JournalBundle\Entity\Journal: journal_show
+        #and other entity routes for list pages.
 ```
+
 
 ### Step 4: Import CMS routing files
 
