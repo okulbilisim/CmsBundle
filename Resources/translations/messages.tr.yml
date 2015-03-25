@@ -7,3 +7,5 @@ cms.action: İşlemler
 sure: Emin misiniz?
 'Are you sure?': 'Emin misiniz?'
 create: Oluştur
+page.create: "Sayfa Oluştur"
+page.edit: "Sayfa Düzenle"

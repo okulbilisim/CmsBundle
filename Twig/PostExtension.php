@@ -6,6 +6,7 @@
 namespace Okulbilisim\CmsBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\MappingException;
 use Okulbilisim\CmsBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -55,7 +56,7 @@ class PostExtension  extends \Twig_Extension{
             case 'string';
                 return '';
             case 'object';
-                return $this->encode(get_class($object));
+                return $this->encode($object);
         }
     }
 
@@ -70,6 +71,7 @@ class PostExtension  extends \Twig_Extension{
      */
     public function encode($string)
     {
+        $string = $this->getEntityName($string);
         $string = base64_encode($string);
         $len = strlen($string);
         $piece = $len/2;
@@ -107,5 +109,23 @@ class PostExtension  extends \Twig_Extension{
     public function getName()
     {
         return 'post_extension';
+    }
+    /**
+     * Returns Doctrine entity name
+     *
+     * @param mixed $entity
+     *
+     * @return string
+     * @throws \Exception
+     */
+    private function getEntityName($entity)
+    {
+        try {
+            $entityName = $this->em->getMetadataFactory()->getMetadataFor(get_class($entity))->getName();
+        } catch (MappingException $e) {
+            throw new \Exception('Given object ' . get_class($entity) . ' is not a Doctrine Entity. ');
+        }
+
+        return $entityName;
     }
 }
