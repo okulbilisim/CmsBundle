@@ -23,6 +23,12 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $post_types = $this->container->getParameter('post_types');
+        $languages  = $this->container->getParameter('languages');
+        $langs = [];
+        foreach ($languages as $key => $lang) {
+            $langs[$lang['code']]=$lang['name'];
+        }
+
         if (!$post_types)
             $post_types = [];
         $builder
@@ -51,6 +57,9 @@ class PostType extends AbstractType
             ]);
         }
 
+        $builder->add('locale','choice',[
+            'choices'=>$langs
+        ]);
 
         if (isset($options['object']) && $options['object']) {
             $builder

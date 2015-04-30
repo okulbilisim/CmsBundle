@@ -41,6 +41,7 @@ class PostController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setUniqueKey($entity->getObject().$entity->getObjectId());
             $em->persist($entity);
             $em->flush();
 
@@ -171,6 +172,7 @@ class PostController extends Controller
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
         if ($editForm->isValid()) {
+            $entity->setUniqueKey($entity->getObject().$entity->getObjectId());
             $em->flush();
             return $this->redirect($this->generateUrl('okulbilisim_cms_admin', ['posttype'=>$entity->getPostType(),'object'=>$entity->getObject(),'id'=>$entity->getObjectId()]));
         }

@@ -21,6 +21,7 @@ Okulbilisim\CmsBundle\Entity\Post:
       gedmo:
         slug:
           seperator: _
+          unique_base: unique_key
           fields:
             - title
     content:
@@ -37,6 +38,12 @@ Okulbilisim\CmsBundle\Entity\Post:
       nullable: true
     objectId:
       type: integer
+      nullable: true
+    unique_key:
+      type: string
+      nullable: true
+    locale:
+      type: string
       nullable: true
     createdAt:
       type: datetime

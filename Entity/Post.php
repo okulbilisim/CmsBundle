@@ -80,7 +80,7 @@ class Post
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -103,7 +103,7 @@ class Post
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -126,7 +126,7 @@ class Post
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -149,7 +149,7 @@ class Post
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -172,7 +172,7 @@ class Post
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {
@@ -195,7 +195,7 @@ class Post
     /**
      * Get post_type
      *
-     * @return string 
+     * @return string
      */
     public function getPostType()
     {
@@ -218,7 +218,7 @@ class Post
     /**
      * Get object
      *
-     * @return string 
+     * @return string
      */
     public function getObject()
     {
@@ -241,7 +241,7 @@ class Post
     /**
      * Get objectId
      *
-     * @return integer 
+     * @return integer
      */
     public function getObjectId()
     {
@@ -264,7 +264,7 @@ class Post
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -287,7 +287,7 @@ class Post
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -310,7 +310,7 @@ class Post
     /**
      * Get deletedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeletedAt()
     {
@@ -343,11 +343,68 @@ class Post
     /**
      * Get posts
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPosts()
     {
         return $this->posts;
     }
 
+    /**
+     * @var string
+     */
+    private $locale;
+
+
+    /**
+     * Set locale
+     *
+     * @param string $locale
+     * @return Post
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * Get locale
+     *
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @var string
+     */
+    private $unique_key;
+
+
+    /**
+     * Set unique_key
+     *
+     * @param string $uniqueKey
+     * @return Post
+     */
+    public function setUniqueKey($uniqueKey)
+    {
+        $this->unique_key = $uniqueKey;
+
+        return $this;
+    }
+
+    /**
+     * Get unique_key
+     *
+     * @return string
+     */
+    public function getUniqueKey()
+    {
+        return $this->getObject() . $this->getObjectId();
+    }
 }
