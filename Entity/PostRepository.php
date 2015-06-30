@@ -14,6 +14,13 @@ class PostRepository extends EntityRepository
 {
     public function getByType($type, $object, $id)
     {
-        return $this->findBy(['post_type'=>$type,'object'=>$object,'objectId'=>$id,'status'=>1]);
+        return $this->findBy(['post_type' => $type, 'object' => $object, 'objectId' => $id, 'status' => 1]);
+    }
+
+    public function getByObject($object, $id)
+    {
+
+        $data = $this->findBy(['object' => $object, 'id' => $id, 'status' => 1]);
+        return $data;
     }
 }
