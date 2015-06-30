@@ -1,10 +1,20 @@
 Okulbilisim\CmsBundle\Entity\Post:
   type: entity
   repositoryClass: PostRepository
-  table: ok_posts
+  table: posts
+  oneToMany:
+    translations:
+        targetEntity: Okulbilisim\CmsBundle\Entity\PostTranslation
+        mappedBy: object
+        cascade: ["persist"]
   gedmo:
     soft_deleteable:
       field_name: deletedAt
+    translation:
+        locale: locale
+        entity: Okulbilisim\CmsBundle\Entity\PostTranslation
+    loggable: true
+
   id:
     id:
       id: true
@@ -16,6 +26,9 @@ Okulbilisim\CmsBundle\Entity\Post:
       type: string
       length: 255
       nullable: false
+      gedmo:
+        - translatable
+        - versioned
     slug:
       type: string
       gedmo:
@@ -27,6 +40,9 @@ Okulbilisim\CmsBundle\Entity\Post:
     content:
       type: text
       nullable: true
+      gedmo:
+        - translatable
+        - versioned
     status:
       type: integer
       length: 2

@@ -407,4 +407,42 @@ class Post
     {
         return $this->getObject() . $this->getObjectId();
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $translations;
+
+
+    /**
+     * Add translations
+     *
+     * @param \Okulbilisim\CmsBundle\Entity\PostTranslation $translations
+     * @return Post
+     */
+    public function addTranslation(\Okulbilisim\CmsBundle\Entity\PostTranslation $translations)
+    {
+        $this->translations[] = $translations;
+
+        return $this;
+    }
+
+    /**
+     * Remove translations
+     *
+     * @param \Okulbilisim\CmsBundle\Entity\PostTranslation $translations
+     */
+    public function removeTranslation(\Okulbilisim\CmsBundle\Entity\PostTranslation $translations)
+    {
+        $this->translations->removeElement($translations);
+    }
+
+    /**
+     * Get translations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
 }
