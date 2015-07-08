@@ -12,7 +12,7 @@ post_new:
 post_create:
     path:     /create/{post_type}/{object}/{objectId}/{parentPost}
     defaults: { _controller: "OkulbilisimCmsBundle:Post:create" , post_type: 'default', object: null, objectId: 0,parentPost: 0}
-    requirements: { _method: post }
+    methods: [POST,PUT]
 
 post_edit:
     path:     /{id}/edit
@@ -21,7 +21,7 @@ post_edit:
 post_update:
     path:     /{id}/update
     defaults: { _controller: "OkulbilisimCmsBundle:Post:update" }
-    requirements: { _method: post|put }
+    methods: [POST,PUT]
 
 post_delete:
     path:     /{id}/delete
