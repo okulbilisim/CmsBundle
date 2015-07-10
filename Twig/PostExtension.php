@@ -102,7 +102,14 @@ class PostExtension  extends \Twig_Extension{
         $cms_routes = $this->container->getParameter('cms_show_routes');
         /** @var Router $router */
         $router = $this->container->get('router');
-        $route = $router->generate($cms_routes[$objectClass],['id'=>$id]);
+        $objectRoute = $cms_routes[$objectClass];
+        $parameters = [];
+        foreach ($objectRoute['parameters'] as $key) {
+            $value = $post->{'get'.ucfirst($key)}();
+            $parameters[$key]=$value;
+        }
+
+        $route = $router->generate($objectRoute['name'],$parameters);
         return '<a href="'.$route.'" target="_blank">'.$object.'</a>';
     }
 
