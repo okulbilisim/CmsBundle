@@ -3,19 +3,23 @@
 namespace Okulbilisim\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use APY\DataGridBundle\Grid\Mapping as GRID;
 
 /**
  * Post
+ * @GRID\Source(columns="id ,title , status, post_type")
  */
 class Post
 {
     /**
      * @var integer
+     * @GRID\Column(title="ID")
      */
     private $id;
 
     /**
      * @var string
+     * @GRID\Column(title="title")
      */
     private $title;
 
@@ -31,11 +35,13 @@ class Post
 
     /**
      * @var integer
+     * @GRID\Column(title="status")
      */
     private $status;
 
     /**
      * @var string
+     * @GRID\Column(title="Post Type")
      */
     private $post_type;
 
