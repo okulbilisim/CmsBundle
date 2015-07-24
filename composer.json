@@ -19,7 +19,7 @@
         "symfony/symfony": ">=2.4.0",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
-        "gedmo/doctrine-extensions": "2.3.*@dev"
+        "gedmo/doctrine-extensions": "dev-wip-v2.4.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "dev-master",
