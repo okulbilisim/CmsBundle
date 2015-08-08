@@ -1,10 +1,10 @@
 
 okulbilisim_cms_admin:
-    path: /manager/cms/post/{posttype}/{object}/{id}
+    path:     /cms/post/{posttype}/{object}/{id}
     defaults: { _controller: OkulbilisimCmsBundle:Admin:index, posttype: 'default' }
 okulbilisim_cms_post_admin:
     resource: "@OkulbilisimCmsBundle/Resources/config/routing/post.yml"
-    prefix:   /manager/cms/post
+    prefix:   /cms/post
 okulbilisim_cms_post_detail:
-    path: /cms/{pageType}/{slug}
+    path:     /cms/{pageType}/{slug}
     defaults: { _controller: OkulbilisimCmsBundle:Post:detail }

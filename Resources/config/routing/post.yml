@@ -8,11 +8,11 @@ post_show:
 
 post_new:
     path:     /new/{post_type}/{object}/{objectId}/{parentPost}
-    defaults: { _controller: "OkulbilisimCmsBundle:Post:new" ,post_type: 'default', object: null, objectId: 0,parentPost: 0}
+    defaults: { _controller: "OkulbilisimCmsBundle:Post:new", post_type: 'default', object: null, objectId: 0, parentPost: 0}
 post_create:
     path:     /create/{post_type}/{object}/{objectId}/{parentPost}
-    defaults: { _controller: "OkulbilisimCmsBundle:Post:create" , post_type: 'default', object: null, objectId: 0,parentPost: 0}
-    methods: [POST,PUT]
+    defaults: { _controller: "OkulbilisimCmsBundle:Post:create", post_type: 'default', object: null, objectId: 0, parentPost: 0}
+    methods:  [POST,PUT]
 
 post_edit:
     path:     /{id}/edit
@@ -21,7 +21,7 @@ post_edit:
 post_update:
     path:     /{id}/update
     defaults: { _controller: "OkulbilisimCmsBundle:Post:update" }
-    methods: [POST,PUT]
+    methods:  [POST,PUT]
 
 post_delete:
     path:     /{id}/delete
