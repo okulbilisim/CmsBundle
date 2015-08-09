@@ -20,7 +20,7 @@ See also:
 
 ## Contributing
 
-We <3 contributors.
+We :heart: contributors.
  
 Thanks to
 [everyone who has contributed](https://github.com/okulbilisim/CmsBundle/contributors) already.
